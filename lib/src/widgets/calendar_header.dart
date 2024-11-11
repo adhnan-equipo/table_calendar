@@ -48,6 +48,8 @@ class CalendarHeader extends StatelessWidget {
       padding: headerStyle.headerPadding,
       child: Row(
         mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (headerStyle.leftChevronVisible)
             CustomIconButton(
@@ -56,20 +58,18 @@ class CalendarHeader extends StatelessWidget {
               margin: headerStyle.leftChevronMargin,
               padding: headerStyle.leftChevronPadding,
             ),
-          Expanded(
-            child: headerTitleBuilder?.call(context, focusedMonth) ??
-                GestureDetector(
-                  onTap: onHeaderTap,
-                  onLongPress: onHeaderLongPress,
-                  child: Text(
-                    text,
-                    style: headerStyle.titleTextStyle,
-                    textAlign: headerStyle.titleCentered
-                        ? TextAlign.center
-                        : TextAlign.start,
-                  ),
+          headerTitleBuilder?.call(context, focusedMonth) ??
+              GestureDetector(
+                onTap: onHeaderTap,
+                onLongPress: onHeaderLongPress,
+                child: Text(
+                  text,
+                  style: headerStyle.titleTextStyle,
+                  textAlign: headerStyle.titleCentered
+                      ? TextAlign.center
+                      : TextAlign.start,
                 ),
-          ),
+              )
           if (headerStyle.formatButtonVisible &&
               availableCalendarFormats.length > 1)
             Padding(
